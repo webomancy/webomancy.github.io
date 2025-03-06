@@ -1,0 +1,142 @@
+/* Main container for section 1 */
+.section_1_main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    /* Animation setup */
+    opacity: 0;
+    transform: translateY(50px); /* Initial slide-up effect */
+    animation: slideUpFadeIn 0.5s ease-out forwards;
+}
+
+/* Slide-up and fade-in animation */
+@keyframes slideUpFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Section 1 content container */
+.section_1_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    gap: 30px;
+    max-width: 550px;
+
+    /* 3D Y-axis rotation */
+    opacity: 0;
+    transform: rotateY(90deg); /* Start rotated on Y-axis */
+    animation: rotateContent 1s ease-out forwards;
+}
+
+/* Positive Y-axis rotation animation */
+@keyframes rotateContent {
+    from {
+        opacity: 0;
+        transform: rotateY(90deg); /* Start rotated */
+    }
+    to {
+        opacity: 1;
+        transform: rotateY(0); /* End at normal */
+    }
+}
+
+/* Heading styling */
+.heading_section_1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: black;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Paragraph styling */
+.para_section_1 {
+    font-size: 1.2rem;
+    color: #333;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* Button styling */
+.button_section_1 {
+    padding: 14px 55px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button_section_1:hover {
+    background-color: #4d4d4d;
+    transform: scale(1.05);
+}
+
+/* Video container */
+.section_1_video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+
+    /* Negative Y-axis rotation */
+    opacity: 0;
+    transform: rotateY(-90deg); /* Start rotated on Y-axis */
+    animation: rotateVideo 1s ease-out forwards;
+}
+
+/* Negative Y-axis rotation animation */
+@keyframes rotateVideo {
+    from {
+        opacity: 0;
+        transform: rotateY(-90deg); /* Start rotated */
+    }
+    to {
+        opacity: 1;
+        transform: rotateY(0); /* End at normal */
+    }
+}
+
+/* Video element */
+.section_1_video video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    background: none;
+    box-shadow: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .section_1_main {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .section_1_content {
+        align-items: center;
+        text-align: center;
+    }
+}

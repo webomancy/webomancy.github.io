@@ -1,0 +1,118 @@
+/* Main container for the link section */
+.link_section_main {
+    background-color: #000;
+    width: 100%;
+    padding: 60px 20px;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+/* Flex container for categories */
+.link_section_container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Link category styles */
+.link_category {
+    flex: 1;
+    min-width: 200px;
+    max-width: 250px;
+    text-align: left;
+}
+
+.link_category h2 {
+    font-size: 1.5rem; /* Smaller title */
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.link_category a {
+    display: block;
+    font-size: 1rem; /* Smaller links */
+    color: #aaa;
+    text-decoration: none;
+    margin-bottom: 12px;
+    transition: color 0.2s ease;
+}
+
+.link_category a:hover {
+    color: #fff;
+}
+
+/* Social icons container */
+.social_icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* Social media icons */
+.icon {
+    width: 35px;
+    height: 35px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    cursor: pointer;
+    filter: grayscale(100%);
+}
+
+/* Individual icons */
+.youtube {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/1384/1384060.png');
+}
+
+.instagram {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/2111/2111463.png');
+}
+
+.twitter {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/5968/5968830.png');
+    filter: brightness(0) invert(1);
+}
+
+.linkedin {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/1384/1384014.png');
+    filter: brightness(0) invert(1);
+}
+
+/* Hover effect for all social icons */
+.icon:hover {
+    transform: scale(1.2);
+    filter: brightness(1) grayscale(0%);
+}
+
+/* Copyright text */
+.copyright {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 50px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .link_section_container {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .social_icons {
+        justify-content: center;
+    }
+
+    .copyright {
+        margin-top: 30px;
+    }
+
+    .link_category {
+        text-align: center;
+    }
+}

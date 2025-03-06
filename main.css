@@ -1,0 +1,18 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Aligns content vertically */
+    align-items: center; /* Aligns content horizontally */
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: white;
+    margin: 0; /* Remove default margin */
+}

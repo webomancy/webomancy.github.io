@@ -1,0 +1,121 @@
+/* Main container for Section 3 */
+.section_3_main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 50px auto;
+    padding: 20px;
+    gap: 50px;
+}
+
+/* Image container */
+.section_3_image {
+    max-width: 300px; /* Reduced size */
+    height: auto;
+    opacity: 0;
+    transform: translateY(50px); /* Slide up effect */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Ensure the image resizes properly */
+.section_3_image img {
+    width: 100%;
+    height: auto;
+}
+
+/* Levitation animation */
+@keyframes levitate {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px); /* Float up */
+    }
+    100% {
+        transform: translateY(0); /* Return to original position */
+    }
+}
+
+/* Content container */
+.section_3_contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    max-width: 600px;
+}
+
+/* Headings */
+.section_3_contents h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s;
+}
+
+/* Paragraph */
+.section_3_contents p {
+    font-size: 1.2rem;
+    color: #2b2b2b;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s;
+}
+
+/* Button */
+.section_3_button {
+    padding: 14px 40px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: auto;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out 0.6s, transform 0.8s ease-out 0.6s, background-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Hover effect */
+.section_3_button:hover {
+    background-color: #4d4d4d;
+    transform: scale(1.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .section_3_main {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .section_3_image {
+        max-width: 250px; /* Adjusted for mobile */
+    }
+
+    .section_3_contents {
+        max-width: 100%;
+    }
+}
+
+/* Slide-up and fade-in effect on scroll */
+.section_3_image.visible {
+    opacity: 1;
+    transform: translateY(0);
+    animation: levitate 4s ease-in-out infinite 1s; /* Levitate after sliding in */
+}
+
+.section_3_contents h1.visible,
+.section_3_contents p.visible,
+.section_3_button.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

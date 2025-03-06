@@ -1,0 +1,121 @@
+/* Main container for Section 4 */
+.section_4_main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 80px auto;
+    padding: 20px;
+    gap: 50px;
+}
+
+/* Content container */
+.section_4_contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    max-width: 600px;
+}
+
+/* Headings */
+.section_4_contents h1 {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 30px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+}
+
+/* Paragraph */
+.section_4_contents p {
+    font-size: 1.2rem;
+    color: #2b2b2b;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out 0.6s;
+}
+
+/* Button container */
+.button-container {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out 0.8s;
+}
+
+/* Button */
+.section_4_button {
+    padding: 14px 40px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.section_4_button:hover {
+    background-color: #4d4d4d;
+    transform: scale(1.1);
+}
+
+/* Image container */
+.section_4_image_container {
+    max-width: 350px;
+    height: auto;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out 0.4s;
+    animation: levitate 3s ease-in-out infinite; /* Added levitation animation */
+}
+
+.section_4_image_container img {
+    width: 100%;
+    height: auto;
+}
+
+/* Slide-up and fade-in effect */
+.section_4_contents h1.visible,
+.section_4_image_container.visible,
+.section_4_contents p.visible,
+.button-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Levitation animation */
+@keyframes levitate {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px); /* Adjust the distance it levitates */
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .section_4_main {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .section_4_contents {
+        max-width: 100%;
+    }
+
+    .section_4_image_container {
+        max-width: 250px;
+    }
+
+    .button-container {
+        align-self: center;
+    }
+}

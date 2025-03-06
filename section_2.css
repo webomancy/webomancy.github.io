@@ -1,0 +1,105 @@
+/* Main container for Section 2 */
+.section_2_container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    gap: 50px;
+    max-width: 1400px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+/* Plan cards */
+.plan_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    border: 1px solid #8a8a8a;
+    border-radius: 20px;
+    height: 500px;
+    position: relative;
+    background-color: transparent;
+    overflow: hidden; /* Ensure anything overflowing (like ribbons) is cropped */
+    opacity: 0; /* Initially hidden */
+    transform: rotateY(90deg); /* Start rotated */
+    transition: all 0.8s ease-out;
+}
+
+.plan_card.visible {
+    opacity: 1;
+    transform: rotateY(0deg); /* Rotate back to normal */
+}
+
+.plan_card:hover {
+    transform: translateY(-10px);
+}
+
+/* Hot corner strip (left side) */
+.hot_corner_strip {
+    position: absolute;
+    top: 10px;
+    left: -50px;
+    background-color: red;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 5px 60px;
+    text-transform: uppercase;
+    transform: rotate(-45deg);
+    z-index: 2;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.144);
+    white-space: nowrap;
+}
+
+/* Headings */
+.plan_card h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 25px;
+}
+
+.plan_card h3 {
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: #1b1b1b;
+    margin-bottom: 25px;
+}
+
+/* Paragraph (attributes/points) */
+.plan_card p {
+    font-size: 1rem;
+    color: #292929;
+    line-height: 2;
+    text-align: left;
+    width: 100%;
+}
+
+/* Contact Sales button */
+.section_2_plan_button {
+    padding: 14px 40px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: auto;
+}
+
+.section_2_plan_button:hover {
+    background-color: #4d4d4d;
+    transform: scale(1.05);
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .section_2_container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
