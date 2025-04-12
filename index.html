@@ -10,7 +10,10 @@
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.21/dist/vanta.net.min.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="contact.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="modal.css">
     <script>
         tailwind.config = {
             theme: {
@@ -262,22 +265,22 @@
             
             <div class="flex flex-col lg:flex-row gap-12">
                 <div class="lg:w-1/2">
-                    <form class="bg-web-blue bg-opacity-50 rounded-xl p-8 border border-gray-800">
-                        <div class="mb-6">
-                            <label for="name" class="block text-lg mb-2">Your Name</label>
-                            <input type="text" id="name" class="w-full bg-web-dark border border-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:border-web-glow transition">
-                        </div>
-                        <div class="mb-6">
-                            <label for="email" class="block text-lg mb-2">Email Address</label>
-                            <input type="email" id="email" class="w-full bg-web-dark border border-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:border-web-glow transition">
-                        </div>
-                        <div class="mb-6">
-                            <label for="message" class="block text-lg mb-2">Your Message</label>
-                            <textarea id="message" rows="5" class="w-full bg-web-dark border border-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:border-web-glow transition"></textarea>
-                        </div>
-                        <a href="#home"><button type="submit" class="w-full bg-web-glow hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 shadow-lg animate-glow">
-                            Send Message
-                        </button></a>
+                    <form id="contact-form" class="bg-web-blue bg-opacity-50 rounded-xl p-8 border border-gray-800">
+                      <div class="mb-6">
+                        <label for="name" class="block text-lg mb-2">Your Name</label>
+                        <input type="text" id="name" name="user_name" class="w-full bg-web-dark border border-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:border-web-glow transition" required>
+                      </div>
+                      <div class="mb-6">
+                        <label for="email" class="block text-lg mb-2">Email Address</label>
+                        <input type="email" id="email" name="user_email" class="w-full bg-web-dark border border-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:border-web-glow transition" required>
+                      </div>
+                      <div class="mb-6">
+                        <label for="message" class="block text-lg mb-2">Your Message</label>
+                        <textarea id="message" name="message" rows="5" class="w-full bg-web-dark border border-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:border-web-glow transition" required></textarea>
+                      </div>
+                      <button type="submit" class="w-full bg-web-glow hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 shadow-lg animate-glow">
+                        Send Message
+                      </button>
                     </form>
                 </div>
                 
@@ -484,6 +487,13 @@
             </div>
         </div>
     </footer>
+    <div id="overlay" class="overlay"></div>
+    <div id="success-modal" class="modal">
+      <div class="modal-content">
+        <p id="modal-text" class="modal-text">Email sent successfully!</p>
+        <button onclick="closeModal()" class="close-btn">Close</button>
+      </div>
+    </div>
     <script src="scripts.js"></script>
 </body>
 </html>
