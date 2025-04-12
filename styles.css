@@ -1,0 +1,72 @@
+html {
+    scroll-behavior: smooth;
+}
+
+.menu-open {
+    transform: translateX(0%);
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.portfolio-overlay {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #3b82f6;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.glow-text {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
+}
+
+.glow-hover:hover {
+    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.7));
+}
+
+.featured-plan {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+}
+
+#vanta-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+}
+
+.hero-title {
+    background: linear-gradient(to right, #e0e7ff, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: gradientShift 3s ease-in-out infinite;
+}
