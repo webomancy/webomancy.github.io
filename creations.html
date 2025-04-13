@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webomancy - Get Your Business Online!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.21/dist/vanta.net.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'web-blue': '#0a1a35',
+                        'web-dark': '#050a15',
+                        'web-light': '#e0e7ff',
+                        'web-glow': '#3b82f6',
+                        'web-purple': '#8b5cf6',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 1.5s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'float-rotate': 'floatRotate 8s ease-in-out infinite',
+                        'gradient-shift': 'gradientShift 8s ease infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            '0%': { 'box-shadow': '0 0 5px #3b82f6' },
+                            '100%': { 'box-shadow': '0 0 20px #3b82f6' },
+                        },
+                        floatRotate: {
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(5deg)' },
+                        },
+                        gradientShift: {
+                            '0%, 100%': { 'background-position': '0% 50%' },
+                            '50%': { 'background-position': '100% 50%' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-web-dark text-white font-sans overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-web-blue bg-opacity-90 backdrop-blur-md z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index" class="text-2xl font-bold glow-text">
+                WEBOMANCY
+            </a>
+            <button id="menu-toggle" class="text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-web-blue bg-opacity-95 z-40 transform -translate-x-full transition-transform duration-300 pt-20">
+        <div class="container mx-auto px-4 py-8 flex flex-col space-y-8 text-center">
+            <a href="#home" class="text-3xl font-bold nav-link py-4">Home</a>
+            <a href="#plans" class="text-3xl font-bold nav-link py-4">Plans</a>
+            <a href="#about" class="text-3xl font-bold nav-link py-4">About</a>
+            <a href="#contact" class="text-3xl font-bold nav-link py-4">Contact</a>
+            <a href="#creations" class="text-3xl font-bold nav-link py-4">Creations</a>
+        </div>
+    </div>
+
+    <!-- Creations Section -->
+    <section id="creations" class="py-20 bg-gradient-to-b from-web-blue to-web-dark">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-4 text-center glow-text">Our Creations</h2>
+            <p class="text-xl text-web-light text-center mb-16 max-w-1xl mx-auto">
+                Websites that speak your language. Pre-built. Pre-loved. Prepped for you.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Portfolio Item 1 -->
+                <div class="portfolio-item relative rounded-xl overflow-hidden h-80">
+                    <img src="image1.webp" alt="Luma Core" class="w-full h-full object-cover">
+                    <div class="portfolio-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-end p-6">
+                        <h3 class="text-2xl font-bold mb-2">Luma Core</h3>
+                        <p class="text-web-light mb-4">AI platform that transforms your creative workflow</p>
+                        <a href="#" class="text-web-glow font-bold hover:underline">View Site</a>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 2 -->
+                <div class="portfolio-item relative rounded-xl overflow-hidden h-80">
+                    <img src="image2.webp" alt="Imagio Flux" class="w-full h-full object-cover">
+                    <div class="portfolio-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-end p-6">
+                        <h3 class="text-2xl font-bold mb-2">Imagio Flux</h3>
+                        <p class="text-web-light mb-4">A futuristic image generator with photorealism</p>
+                        <a href="https://imagioflux.github.io/" target="_blank" class="text-web-glow font-bold hover:underline">View Site</a>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 3 -->
+                <div class="portfolio-item relative rounded-xl overflow-hidden h-80">
+                    <img src="image6.webp" alt="Serenium" class="w-full h-full object-cover">
+                    <div class="portfolio-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-end p-6">
+                        <h3 class="text-2xl font-bold mb-2">Serenium</h3>
+                        <p class="text-web-light mb-4">AI-powered companion for mental clarity, emotional balance, and personal growth.</p>
+                        <a href="#" class="text-web-glow font-bold hover:underline">View Site</a>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 4 -->
+                <div class="portfolio-item relative rounded-xl overflow-hidden h-80">
+                    <img src="image3.webp" alt="The Nature" class="w-full h-full object-cover">
+                    <div class="portfolio-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-end p-6">
+                        <h3 class="text-2xl font-bold mb-2">The Nature</h3>
+                        <p class="text-web-light mb-4">An immersive nature based website with animations</p>
+                        <a href="#" class="text-web-glow font-bold hover:underline">View Site</a>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 5 -->
+                <div class="portfolio-item relative rounded-xl overflow-hidden h-80">
+                    <img src="image4.webp" alt="The Gamer Byte" class="w-full h-full object-cover">
+                    <div class="portfolio-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-end p-6">
+                        <h3 class="text-2xl font-bold mb-2">Gamer Byte</h3>
+                        <p class="text-web-light mb-4">An online e-commerce store selling gaming products</p>
+                        <a href="https://thegamerbyte.github.io/" target="_blank" class="text-web-glow font-bold hover:underline">View Site</a>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 6 -->
+                <div class="portfolio-item relative rounded-xl overflow-hidden h-80">
+                    <img src="image5.webp" alt="Sentinel AI" class="w-full h-full object-cover">
+                    <div class="portfolio-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-end p-6">
+                        <h3 class="text-2xl font-bold mb-2">Sentinel AI</h3>
+                        <p class="text-web-light mb-4">Autonomous AI cybersecurity platform with real-time threat detection</p>
+                        <a href="#" class="text-web-glow font-bold hover:underline">View Site</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16">
+                <a href="index" class="inline-block bg-web-glow hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg animate-glow">
+                    View Homepage
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-16">
+        <div class="container mx-auto px-4">
+            <div class="border-t border-gray-800 mt-16 pt-8 text-center text-web-light">
+                <p>© 2025 Webomancy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+</html>
