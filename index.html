@@ -16,465 +16,875 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.21/dist/vanta.net.min.js"></script>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="contact.js"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="modal.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'web-blue': '#0a1a35',
-                        'web-dark': '#050a15',
-                        'web-light': '#e0e7ff',
-                        'web-glow': '#3b82f6',
-                        'web-purple': '#8b5cf6',
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 1.5s infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                        'float-rotate': 'floatRotate 8s ease-in-out infinite',
-                        'gradient-shift': 'gradientShift 8s ease infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        },
-                        glow: {
-                            '0%': { 'box-shadow': '0 0 5px #3b82f6' },
-                            '100%': { 'box-shadow': '0 0 20px #3b82f6' },
-                        },
-                        floatRotate: {
-                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
-                            '50%': { transform: 'translateY(-20px) rotate(5deg)' },
-                        },
-                        gradientShift: {
-                            '0%, 100%': { 'background-position': '0% 50%' },
-                            '50%': { 'background-position': '100% 50%' },
-                        }
-                    }
-                }
-            }
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: #1a1a1a;
+            background-color: #f9f7f1;
         }
-    </script>
+        .serif-font {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(249, 247, 241, 0.9) 0%, rgba(249, 247, 241, 0.95) 100%), url('https://i.postimg.cc/KjNqf3GX/Soft-luxury-background-with-a-subtle-marble-texture-light-cream-and-ivory-tones-elegant-shadows.jpg') no-repeat center center;
+            background-size: cover;
+        }
+        .btn-gold {
+            background-color: #c5a880;
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover {
+            background-color: #b8a07e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(184, 160, 126, 0.2);
+        }
+        .btn-outline {
+            border: 1px solid #c5a880;
+            transition: all 0.3s ease;
+        }
+        .btn-outline:hover {
+            background-color: rgba(197, 168, 128, 0.1);
+            transform: translateY(-2px);
+        }
+        .section-divider {
+            border-top: 1px solid #e2e2e2;
+        }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+        .portfolio-item {
+            border: 1px solid #505050;
+        }
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        .custom-radio:checked + .radio-label {
+            border-color: #c5a880;
+            background-color: rgba(197, 168, 128, 0.1);
+        }
+    </style>
 </head>
-<body class="bg-web-dark text-white font-sans overflow-x-hidden">
+<body>
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 bg-[#f9f7f1] z-50 flex items-center justify-center">
+        <div class="text-5xl serif-font text-[#c5a880] animate-pulse">W</div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 bg-web-blue bg-opacity-90 backdrop-blur-md z-50 shadow-lg">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold glow-text">
-                WEBOMANCY
-            </a>
-            <button id="menu-toggle" class="text-white focus:outline-none">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
+    <nav class="bg-[#f9f7f1] bg-opacity-90 fixed w-full z-20 top-0 border-b border-[#e2e2e2]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="serif-font text-2xl text-[#1a1a1a]">Webomancy</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#home" class="text-[#1a1a1a] hover:text-[#c5a880] px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="#services" class="text-[#1a1a1a] hover:text-[#c5a880] px-3 py-2 text-sm font-medium">Services</a>
+                        <a href="#pricing" class="text-[#1a1a1a] hover:text-[#c5a880] px-3 py-2 text-sm font-medium">Pricing</a>
+                        <a href="#portfolio" class="text-[#1a1a1a] hover:text-[#c5a880] px-3 py-2 text-sm font-medium">Portfolio</a>
+                        <a href="#about" class="text-[#1a1a1a] hover:text-[#c5a880] px-3 py-2 text-sm font-medium">About</a>
+                        <a href="#contact" class="text-[#1a1a1a] hover:text-[#c5a880] px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-[#1a1a1a] hover:text-[#c5a880] focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-[#f9f7f1]">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="text-[#1a1a1a] hover:text-[#c5a880] block px-3 py-2 text-base font-medium">Home</a>
+                <a href="#services" class="text-[#1a1a1a] hover:text-[#c5a880] block px-3 py-2 text-base font-medium">Services</a>
+                <a href="#pricing" class="text-[#1a1a1a] hover:text-[#c5a880] block px-3 py-2 text-base font-medium">Pricing</a>
+                <a href="#portfolio" class="text-[#1a1a1a] hover:text-[#c5a880] block px-3 py-2 text-base font-medium">Portfolio</a>
+                <a href="#about" class="text-[#1a1a1a] hover:text-[#c5a880] block px-3 py-2 text-base font-medium">About</a>
+                <a href="#contact" class="text-[#1a1a1a] hover:text-[#c5a880] block px-3 py-2 text-base font-medium">Contact</a>
+            </div>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 bg-web-blue bg-opacity-95 z-40 transform -translate-x-full transition-transform duration-300 pt-20">
-        <div class="container mx-auto px-4 py-8 flex flex-col space-y-8 text-center">
-            <a href="#home" class="text-3xl font-bold nav-link py-4">Home</a>
-            <a href="#plans" class="text-3xl font-bold nav-link py-4">Plans</a>
-            <a href="#about" class="text-3xl font-bold nav-link py-4">About</a>
-            <a href="#contact" class="text-3xl font-bold nav-link py-4">Contact</a>
-            <a href="#creations" class="text-3xl font-bold nav-link py-4">Creations</a>
-        </div>
-    </div>
-    <!-- Minimal Hero Section -->
-    <section id="home" class="min-h-screen flex items-center relative overflow-hidden">
-        <div id="vanta-bg"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-web-dark opacity-70"></div>
-        
-        <div class="container mx-auto px-4 hero-content">
-            <div class="max-w-3xl mx-auto text-center">
-                <h1 class="text-5xl md:text-6xl font-bold mb-6 hero-title">
-                    Digital Presence Made Simple
-                </h1>
-                <p class="text-xl text-web-light mb-10 max-w-2xl mx-auto">
-                    Beautiful, affordable websites that help your business stand out online.
-                </p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="#plans" class="inline-block bg-web-glow hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
-                        Get Started
-                    </a>
-                    <a href="#creations" class="inline-block bg-transparent border-2 border-web-glow hover:bg-web-glow text-white font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105">
-                        View Work <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg pt-32 pb-20 md:pt-40 md:pb-28 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="md:flex items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0 fade-in">
+                    <h1 class="serif-font text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">Custom Websites That Speak Elegance</h1>
+                    <p class="text-lg md:text-xl text-[#666666] mb-8">We don't use templates. We craft digital experiences tailored to your brand, your voice, and your goals.</p>
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="btn-gold text-white px-8 py-3 rounded-lg font-medium">Start Your Project</a>
+                        <a href="#portfolio" class="btn-outline text-[#1a1a1a] px-8 py-3 rounded-lg font-medium">View Work</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center fade-in">
+                    <div class="relative w-full max-w-md">
+                        <div class="absolute -top-10 -left-10 w-32 h-32 bg-[#c5a880] bg-opacity-20 rounded-full"></div>
+                        <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-[#c5a880] bg-opacity-20 rounded-full"></div>
+                        <div class="relative z-10 floating">
+                            <img src="pexels-designecologist-1779487.jpg" alt="Web Design" class="rounded-lg shadow-xl">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Plans Section -->
-    <section id="plans" class="py-20 bg-web-dark">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-4 glow-text">Web Hosting Plans</h2>
-            <p class="text-xl text-web-light text-center mb-16 max-w-2xl mx-auto">
-                Choose the plan that fits your needs. All plans include our signature enchantments!
-            </p>
+    <!-- Trust-First Value Section -->
+    <section id="services" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="serif-font text-3xl md:text-4xl font-bold mb-4">Why Webomancy?</h2>
+                <div class="w-20 h-0.5 bg-[#c5a880] mx-auto mb-6"></div>
+                <p class="text-[#666666] max-w-2xl mx-auto">We combine technical expertise with artistic vision to create websites that truly represent your brand.</p>
+            </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <!-- Plan -->
-                <div class="plan-card bg-web-blue rounded-xl p-8 border border-gray-800 hover:border-web-glow transition-all duration-300 flex flex-col">
-                    <div class="flex-grow">
-                        <div class="flex flex-col justify-between items-start mb-6">
-                            <h3 class="text-3xl font-bold">Foundation</h3><br>
-                            <div class="text-2xl font-bold">₹100-₹199<span class="text-lg">/mo</span></div>
-                        </div>
-                        <ul class="space-y-3 mb-8">
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Single-page website</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Clean, simple design</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Mobile-friendly</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Static content</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Basic contact info</li>
-                        </ul>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-[#f9f7f1] p-8 rounded-lg fade-in">
+                    <div class="text-[#c5a880] text-3xl mb-4">
+                        <i class="fas fa-paint-brush"></i>
                     </div>
-                    <a href="#contact"><button class="w-full bg-web-glow hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg animate-glow">
-                        Activate Plan
-                    </button></a>
+                    <h3 class="serif-font text-xl font-semibold mb-3">100% Custom Design</h3>
+                    <p class="text-[#666666]">No templates. Every pixel is crafted specifically for your brand's unique identity and requirements.</p>
                 </div>
-                <!-- Plan -->
-                <div class="plan-card bg-web-blue rounded-xl p-8 border border-gray-800 hover:border-web-glow transition-all duration-300 flex flex-col">
-                    <div class="flex-grow">
-                        <div class="flex flex-col justify-between items-start mb-6">
-                            <h3 class="text-3xl font-bold">Momentum</h3><br>
-                            <div class="text-2xl font-bold">₹499-₹899<span class="text-lg">/mo</span></div>
-                        </div>
-                        <ul class="space-y-3 mb-8">
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Multi-page website</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Fully responsive</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> User-friendly navigation</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Basic SEO setup</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Contact form integration</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Sophisticated Link Section</li>
-                        </ul>
+                
+                <div class="bg-[#f9f7f1] p-8 rounded-lg fade-in">
+                    <div class="text-[#c5a880] text-3xl mb-4">
+                        <i class="fas fa-mobile-alt"></i>
                     </div>
-                    <a href="#contact"><button class="w-full bg-web-glow hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg animate-glow">
-                        Activate Plan
-                    </button></a>
+                    <h3 class="serif-font text-xl font-semibold mb-3">Mobile-Ready & SEO-Friendly</h3>
+                    <p class="text-[#666666]">Your site will look perfect on any device and be optimized to rank well in search engines.</p>
                 </div>
-                <!-- Plan -->
-                <div class="plan-card bg-web-blue rounded-xl p-8 border border-gray-800 hover:border-web-glow transition-all duration-300 flex flex-col">
-                    <div class="flex-grow">
-                        <div class="flex flex-col justify-between items-start mb-6">
-                            <h3 class="text-3xl font-bold">Mastery</h3><br>
-                            <div class="text-2xl font-bold">₹999-₹1,399<span class="text-lg">/mo</span></div>
-                        </div>
-                        <ul class="space-y-3 mb-8">
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Fully professional design</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Custom-tailored UI/UX</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Advanced SEO optimization</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Media gallery support</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Extraordinary Animations</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Performance & speed optimized</li>
-                        </ul>
+                
+                <div class="bg-[#f9f7f1] p-8 rounded-lg fade-in">
+                    <div class="text-[#c5a880] text-3xl mb-4">
+                        <i class="fas fa-concierge-bell"></i>
                     </div>
-                    <a href="#contact"><button class="w-full bg-web-glow hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg animate-glow">
-                        Activate Plan
-                    </button></a>
+                    <h3 class="serif-font text-xl font-semibold mb-3">Done-for-You Process</h3>
+                    <p class="text-[#666666]">You relax while we handle everything from design to deployment. No technical knowledge needed.</p>
                 </div>
-                <!-- Plan -->
-                <div class="plan-card bg-web-blue rounded-xl p-8 border border-gray-800 hover:border-web-glow transition-all duration-300 flex flex-col">
-                    <div class="flex-grow">
-                        <div class="flex flex-col justify-between items-start mb-6">
-                            <h3 class="text-3xl font-bold">Innovation</h3><br>
-                            <div class="text-2xl font-bold">₹1,699-₹1,999<span class="text-lg">/mo</span></div>
-                        </div>
-        <ul class="space-y-3 mb-8">
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Dynamic, interactive design</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Custom functionalities</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Blog/CMS integration</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Social media links</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Advanced security</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Domain & hosting</li>
-                        </ul>
+                
+                <div class="bg-[#f9f7f1] p-8 rounded-lg fade-in">
+                    <div class="text-[#c5a880] text-3xl mb-4">
+                        <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <a href="#contact"><button class="w-full bg-web-glow hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg animate-glow">
-                        Activate Plan
-                    </button></a>
+                    <h3 class="serif-font text-xl font-semibold mb-3">Local Expertise</h3>
+                    <p class="text-[#666666]">Trusted by local stores & startups in Kerala. We understand the regional market needs.</p>
                 </div>
-                <!-- Plan -->
-                <div class="plan-card bg-web-blue rounded-xl p-8 border border-gray-800 hover:border-web-glow transition-all duration-300 flex flex-col">
-                    <div class="flex-grow">
-                        <div class="flex flex-col justify-between items-start mb-6">
-                            <h3 class="text-3xl font-bold">Legacy</h3><br>
-                            <div class="text-2xl font-bold">₹2,099-₹2,799<span class="text-lg">/mo</span></div>
-                        </div>
-                        <ul class="space-y-3 mb-8">
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Premium, cutting-edge design</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Custom UI/UX branding</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> E-commerce ready</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> AI-powered interactivity</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> Lifetime support</li>
-                            <li class="flex items-center"><i class="fas fa-check text-web-glow mr-3"></i> All your needs</li>
-                        </ul>
+                
+                <div class="bg-[#f9f7f1] p-8 rounded-lg fade-in">
+                    <div class="text-[#c5a880] text-3xl mb-4">
+                        <i class="fas fa-server"></i>
                     </div>
-                    <a href="#contact"><button class="w-full bg-web-glow hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg animate-glow">
-                        Activate Plan
-                    </button></a>
+                    <h3 class="serif-font text-xl font-semibold mb-3">Complete Support</h3>
+                    <p class="text-[#666666]">Full hosting, maintenance, and support included so you never have to worry about technical issues.</p>
+                </div>
+                
+                <div class="bg-[#f9f7f1] p-8 rounded-lg fade-in">
+                    <div class="text-[#c5a880] text-3xl mb-4">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3 class="serif-font text-xl font-semibold mb-3">Security First</h3>
+                    <p class="text-[#666666]">We implement the latest security measures to protect your site and your customers' data.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-gradient-to-b from-web-dark to-web-blue">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl font-bold mb-8 text-center glow-text">The Webomancy Story</h2>
-                <div class="bg-web-blue bg-opacity-50 rounded-xl p-8 backdrop-blur-sm border border-gray-800">
-                    <p class="text-lg mb-6">
-                        We are a startup based in Kerala, India, driven by a passionate team focused on innovation and excellence. As a newly launched service, we are excited to embark on this journey and aim to achieve great milestones with your support.
-                    </p>
-                    <p class="text-lg mb-6">
-                        Thank you for choosing us to build your online presence. Our skilled developers are committed to designing and implementing modern, captivating website elements that not only meet today's standards but also help your site stand out beautifully.
-                    </p>
-                    <p class="text-lg">
-                        Your trust means everything to us. It inspires us to go above and beyond, and we are dedicated to delivering exceptional digital solutions tailored to your needs.
-                    </p>
+    <!-- Interactive Pricing Estimator -->
+    <section id="pricing" class="py-20 px-4 sm:px-6 lg:px-8 bg-[#f9f7f1]">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="serif-font text-3xl md:text-4xl font-bold mb-4">What Will It Cost?</h2>
+                <div class="w-20 h-0.5 bg-[#c5a880] mx-auto mb-6"></div>
+                <p class="text-[#666666] max-w-2xl mx-auto">Our pricing is transparent and tailored to your specific needs. Use this estimator to get an idea.</p>
+            </div>
+            
+            <div class="bg-white p-8 rounded-lg shadow-sm fade-in">
+                <div id="step-1" class="mb-12">
+                    <h3 class="serif-font text-xl font-semibold mb-6">1. What type of website do you need?</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <input type="radio" name="website-type" id="single-page" class="hidden custom-radio" value="single-page">
+                            <label for="single-page" class="radio-label border border-gray-200 rounded-lg p-4 block cursor-pointer hover:border-[#c5a880] transition-all">
+                                <div class="font-medium mb-1">Single-Page</div>
+                                <div class="text-sm text-[#666666]">Ideal for portfolios or simple business presentations</div>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" name="website-type" id="multi-page" class="hidden custom-radio" value="multi-page">
+                            <label for="multi-page" class="radio-label border border-gray-200 rounded-lg p-4 block cursor-pointer hover:border-[#c5a880] transition-all">
+                                <div class="font-medium mb-1">Multi-Page</div>
+                                <div class="text-sm text-[#666666]">For businesses needing multiple sections/pages</div>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" name="website-type" id="ecommerce" class="hidden custom-radio" value="ecommerce">
+                            <label for="ecommerce" class="radio-label border border-gray-200 rounded-lg p-4 block cursor-pointer hover:border-[#c5a880] transition-all">
+                                <div class="font-medium mb-1">E-Commerce</div>
+                                <div class="text-sm text-[#666666]">Online store with product listings and checkout</div>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" name="website-type" id="blog-cms" class="hidden custom-radio" value="blog-cms">
+                            <label for="blog-cms" class="radio-label border border-gray-200 rounded-lg p-4 block cursor-pointer hover:border-[#c5a880] transition-all">
+                                <div class="font-medium mb-1">Blog / CMS</div>
+                                <div class="text-sm text-[#666666]">Content management system for regular updates</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="step-2" class="mb-12 hidden">
+                    <h3 class="serif-font text-xl font-semibold mb-6">2. Do you need animations or custom features?</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <input type="radio" name="features" id="simple" class="hidden custom-radio" value="simple">
+                            <label for="simple" class="radio-label border border-gray-200 rounded-lg p-4 block cursor-pointer hover:border-[#c5a880] transition-all">
+                                <div class="font-medium mb-1">Simple</div>
+                                <div class="text-sm text-[#666666]">Basic functionality with minimal animations</div>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" name="features" id="advanced-ui" class="hidden custom-radio" value="advanced-ui">
+                            <label for="advanced-ui" class="radio-label border border-gray-200 rounded-lg p-4 block cursor-pointer hover:border-[#c5a880] transition-all">
+                                <div class="font-medium mb-1">Advanced UI</div>
+                                <div class="text-sm text-[#666666]">Custom interactive elements and transitions</div>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" name="features" id="scroll-effects" class="hidden custom-radio" value="scroll-effects">
+                            <label for="scroll-effects" class="radio-label border border-gray-200 rounded-lg p-4 block cursor-pointer hover:border-[#c5a880] transition-all">
+                                <div class="font-medium mb-1">Scroll Effects</div>
+                                <div class="text-sm text-[#666666]">Parallax and scroll-triggered animations</div>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" name="features" id="cms-admin" class="hidden custom-radio" value="cms-admin">
+                            <label for="cms-admin" class="radio-label border border-gray-200 rounded-lg p-4 block cursor-pointer hover:border-[#c5a880] transition-all">
+                                <div class="font-medium mb-1">CMS & Admin Panel</div>
+                                <div class="text-sm text-[#666666]">Full content management system with admin dashboard</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="step-3" class="mb-12 hidden">
+                    <h3 class="serif-font text-xl font-semibold mb-6">3. Pick your comfort level:</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <input type="radio" name="package" id="foundation" class="hidden custom-radio" value="foundation">
+                            <label for="foundation" class="radio-label border border-gray-200 rounded-lg p-4 block cursor-pointer hover:border-[#c5a880] transition-all">
+                                <div class="font-medium mb-1">Foundation (₹100–₹199)</div>
+                                <div class="text-sm text-[#666666]">Essential features for getting started</div>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" name="package" id="momentum" class="hidden custom-radio" value="momentum">
+                            <label for="momentum" class="radio-label border border-gray-200 rounded-lg p-4 block cursor-pointer hover:border-[#c5a880] transition-all">
+                                <div class="font-medium mb-1">Momentum (₹499–₹899)</div>
+                                <div class="text-sm text-[#666666]">Enhanced features for growing businesses</div>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" name="package" id="mastery" class="hidden custom-radio" value="mastery">
+                            <label for="mastery" class="radio-label border border-gray-200 rounded-lg p-4 block cursor-pointer hover:border-[#c5a880] transition-all">
+                                <div class="font-medium mb-1">Mastery (₹999–₹1,399)</div>
+                                <div class="text-sm text-[#666666]">Premium solutions for established brands</div>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" name="package" id="innovation" class="hidden custom-radio" value="innovation">
+                            <label for="innovation" class="radio-label border border-gray-200 rounded-lg p-4 block cursor-pointer hover:border-[#c5a880] transition-all">
+                                <div class="font-medium mb-1">Innovation (₹1,699–₹1,999)</div>
+                                <div class="text-sm text-[#666666]">Cutting-edge technology and custom solutions</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="result" class="hidden text-center py-8">
+                    <div class="serif-font text-2xl mb-4">Estimated: <span id="price-range" class="text-[#c5a880]">₹___ – ₹___</span> /month</div>
+                    <p class="text-[#666666] mb-6">This is an estimate based on your selections. Exact pricing will be confirmed after consultation.</p>
+                    <a href="#contact" class="btn-gold text-white px-8 py-3 rounded-lg font-medium inline-block">Let's Talk About It</a>
+                </div>
+                
+                <div class="flex justify-between">
+                    <button id="prev-btn" class="btn-outline text-[#1a1a1a] px-6 py-2 rounded-lg font-medium hidden">Previous</button>
+                    <button id="next-btn" class="btn-gold text-white px-6 py-2 rounded-lg font-medium">Next</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Showcase -->
+    <section id="portfolio" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="serif-font text-3xl md:text-4xl font-bold mb-4">Our Portfolio</h2>
+                <div class="w-20 h-0.5 bg-[#c5a880] mx-auto mb-6"></div>
+                <p class="text-[#666666] max-w-2xl mx-auto">Each project is a unique creation, designed to perfectly match our clients' vision and brand identity.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="portfolio-item relative rounded-lg overflow-hidden fade-in">
+                    <img src="image1.webp" alt="Noir Dining" class="w-full h-80 object-cover">
+                    <div class="portfolio-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center opacity-0 transition-opacity duration-300 p-6">
+                        <h3 class="serif-font text-2xl text-white font-semibold mb-2">Noir Dining</h3>
+                        <p class="text-[#c5a880] text-sm mb-4">A premium dark-themed restaurant site built to impress</p>
+                        <span class="text-white bg-[#c5a880] px-3 py-1 rounded-full text-xs mb-4">Theme: Restaurant</span>
+                        <a href="https://webomancy-noir-dining-t4-demo.pages.dev/" target="_blank" class="text-white border border-white px-4 py-2 rounded hover:bg-white hover:text-[#1a1a1a] transition-all">View Site</a>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item relative rounded-lg overflow-hidden fade-in">
+                    <img src="image2.webp" alt="Noir Kitchen" class="w-full h-80 object-cover">
+                    <div class="portfolio-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center opacity-0 transition-opacity duration-300 p-6">
+                        <h3 class="serif-font text-2xl text-white font-semibold mb-2">Noir Kitchen</h3>
+                        <p class="text-[#c5a880] text-sm mb-4">Elegant culinary website with recipe management</p>
+                        <span class="text-white bg-[#c5a880] px-3 py-1 rounded-full text-xs mb-4">Theme: Food & Beverage</span>
+                        <a href="https://webomancy-noir-kitchen-light-t4-demo.pages.dev/" target="_blank" class="text-white border border-white px-4 py-2 rounded hover:bg-white hover:text-[#1a1a1a] transition-all">View Site</a>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item relative rounded-lg overflow-hidden fade-in">
+                    <img src="image3.webp" alt="Hollywood Menswear" class="w-full h-80 object-cover">
+                    <div class="portfolio-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center opacity-0 transition-opacity duration-300 p-6">
+                        <h3 class="serif-font text-2xl text-white font-semibold mb-2">Hollywood Menswear</h3>
+                        <p class="text-[#c5a880] text-sm mb-4">Sophisticated e-commerce for premium menswear</p>
+                        <span class="text-white bg-[#c5a880] px-3 py-1 rounded-full text-xs mb-4">Theme: Fashion</span>
+                        <a href="https://webomancy-hollywood-mens-wear-demo-t5.pages.dev/" target="_blank" class="text-white border border-white px-4 py-2 rounded hover:bg-white hover:text-[#1a1a1a] transition-all">View Site</a>
+                    </div>
                 </div>
             </div>
             
-            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div class="bg-web-blue bg-opacity-50 p-6 rounded-xl border border-gray-800">
-                    <div class="text-4xl text-web-glow mb-4"><i class="fas fa-hat-wizard"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Fabulous Design</h3>
-                    <p class="text-web-light">Visually stunning interfaces that captivate</p>
+            <div class="text-center mt-12 fade-in">
+                <a href="creations" target="_blank" class="btn-outline text-[#1a1a1a] px-8 py-3 rounded-lg font-medium inline-block">See More Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Webomancy -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-[#f9f7f1]">
+        <div class="max-w-7xl mx-auto">
+            <div class="md:flex items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0 fade-in">
+                    <h2 class="serif-font text-3xl md:text-4xl font-bold mb-6">About Webomancy</h2>
+                    <div class="w-20 h-0.5 bg-[#c5a880] mb-6"></div>
+                    <p class="text-[#666666] mb-6">We started Webomancy as two friends at 16, because we hated seeing good businesses stuck with bad websites. What began as a passion project in our college dorm has grown into a dedicated team of designers and developers.</p>
+                    <p class="text-[#666666] mb-6">We custom-build everything from scratch — no shortcuts, no templates — so your brand stands out like it should. Our approach combines technical excellence with artistic sensibility to create digital experiences that truly resonate.</p>
+                    <p class="text-[#666666] mb-8">We're based in Kerala, but work with clients all over India who appreciate craftsmanship and attention to detail.</p>
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="btn-gold text-white px-8 py-3 rounded-lg font-medium">Work With Us</a>
+                        <a href="#portfolio" class="btn-outline text-[#1a1a1a] px-8 py-3 rounded-lg font-medium">Our Work</a>
+                    </div>
                 </div>
-                <div class="bg-web-blue bg-opacity-50 p-6 rounded-xl border border-gray-800">
-                    <div class="text-4xl text-web-glow mb-4"><i class="fas fa-bolt"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Lightning Speed</h3>
-                    <p class="text-web-light">Optimized for instant loading</p>
+                <div class="md:w-1/2 flex justify-center fade-in">
+                    <div class="relative w-full max-w-md">
+                        <div class="absolute -top-6 -left-6 w-24 h-24 bg-[#c5a880] bg-opacity-20 rounded-full"></div>
+                        <div class="relative z-10">
+                            <img src="shake_hand.webp" alt="Webomancy Team">
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-[#c5a880] bg-opacity-20 rounded-full"></div>
+                    </div>
                 </div>
-                <div class="bg-web-blue bg-opacity-50 p-6 rounded-xl border border-gray-800">
-                    <div class="text-4xl text-web-glow mb-4"><i class="fas fa-shield-alt"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Affordable Plans</h3>
-                    <p class="text-web-light">Extremely affordable plans</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="serif-font text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
+                <div class="w-20 h-0.5 bg-[#c5a880] mx-auto mb-6"></div>
+                <p class="text-[#666666] max-w-2xl mx-auto">Don't just take our word for it. Here's what some of our clients have to say about working with us.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-[#f9f7f1] p-8 rounded-lg transition-all duration-300 fade-in">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-[#c5a880]"></i>
+                        <i class="fas fa-star text-[#c5a880]"></i>
+                        <i class="fas fa-star text-[#c5a880]"></i>
+                        <i class="fas fa-star text-[#c5a880]"></i>
+                        <i class="fas fa-star text-[#c5a880]"></i>
+                    </div>
+                    <p class="text-[#666666] italic mb-6">"I couldn't believe how polished the site felt. It was like working with a big agency — but better. The attention to detail was incredible."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-[#c5a880] bg-opacity-20 flex items-center justify-center mr-4">
+                            <span class="text-[#c5a880] font-medium">RS</span>
+                        </div>
+                        <div>
+                            <div class="font-medium">Rahul S.</div>
+                            <div class="text-sm text-[#666666]">Noir Dining</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-web-blue bg-opacity-50 p-6 rounded-xl border border-gray-800">
-                    <div class="text-4xl text-web-glow mb-4"><i class="fas fa-chart-line"></i></div>
-                    <h3 class="text-xl font-bold mb-2">More Customers</h3>
-                    <p class="text-web-light">Designed to maximize reach</p>
+                
+                <div class="testimonial-card bg-[#f9f7f1] p-8 rounded-lg transition-all duration-300 fade-in">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-[#c5a880]"></i>
+                        <i class="fas fa-star text-[#c5a880]"></i>
+                        <i class="fas fa-star text-[#c5a880]"></i>
+                        <i class="fas fa-star text-[#c5a880]"></i>
+                        <i class="fas fa-star text-[#c5a880]"></i>
+                    </div>
+                    <p class="text-[#666666] italic mb-6">"They really understood what we needed, and built it faster than we expected. Our online sales increased by 40% after launching the new site."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-[#c5a880] bg-opacity-20 flex items-center justify-center mr-4">
+                            <span class="text-[#c5a880] font-medium">PK</span>
+                        </div>
+                        <div>
+                            <div class="font-medium">Priya K.</div>
+                            <div class="text-sm text-[#666666]">Hollywood Menswear</div>
+                        </div>
+                    </div>
                 </div>
+                
+                <div class="testimonial-card bg-[#f9f7f1] p-8 rounded-lg transition-all duration-300 fade-in">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-[#c5a880]"></i>
+                        <i class="fas fa-star text-[#c5a880]"></i>
+                        <i class="fas fa-star text-[#c5a880]"></i>
+                        <i class="fas fa-star text-[#c5a880]"></i>
+                        <i class="fas fa-star text-[#c5a880]"></i>
+                    </div>
+                    <p class="text-[#666666] italic mb-6">"The team was patient with all my questions and changes. The result exceeded my expectations - it's exactly what I envisioned but better."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-[#c5a880] bg-opacity-20 flex items-center justify-center mr-4">
+                            <span class="text-[#c5a880] font-medium">AM</span>
+                        </div>
+                        <div>
+                            <div class="font-medium">Ananya M.</div>
+                            <div class="text-sm text-[#666666]">Noir Kitchen</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-[#c5a880] bg-opacity-10">
+        <div class="max-w-4xl mx-auto text-center fade-in">
+            <h2 class="serif-font text-3xl md:text-4xl font-bold mb-6">You deserve a website that reflects how good your work really is.</h2>
+            <p class="text-[#666666] mb-8 max-w-2xl mx-auto">Let's create something beautiful together. Whether you're just starting out or ready to elevate your online presence, we're here to help.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#contact" class="btn-gold text-white px-8 py-3 rounded-lg font-medium">Start My Project</a>
+                <a href="#contact" class="btn-outline text-[#1a1a1a] px-8 py-3 rounded-lg font-medium">Book a Call</a>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-web-dark">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold mb-12 text-center glow-text">Contact Us for Deals</h2>
-            
-            <div class="flex flex-col lg:flex-row gap-12">
-                <div class="lg:w-1/2">
-                    <form id="contact-form" class="bg-web-blue bg-opacity-50 rounded-xl p-8 border border-gray-800">
-                      <div class="mb-6">
-                        <label for="name" class="block text-lg mb-2">Your Name</label>
-                        <input type="text" id="name" name="user_name" class="w-full bg-web-dark border border-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:border-web-glow transition" required>
-                      </div>
-                      <div class="mb-6">
-                        <label for="email" class="block text-lg mb-2">Email Address</label>
-                        <input type="email" id="email" name="user_email" class="w-full bg-web-dark border border-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:border-web-glow transition" required>
-                      </div>
-                      <div class="mb-6">
-                        <label for="message" class="block text-lg mb-2">Your Message</label>
-                        <textarea id="message" name="message" rows="5" class="w-full bg-web-dark border border-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:border-web-glow transition" required></textarea>
-                      </div>
-                      <button type="submit" class="w-full bg-web-glow hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 shadow-lg animate-glow">
-                        Send Message
-                      </button>
-                    </form>
-                </div>
-                
-                <div class="lg:w-1/2">
-                    <div class="bg-web-blue bg-opacity-50 rounded-xl p-8 border border-gray-800 h-full">
-                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
-                        
-                        <div class="space-y-6">
-                            <div class="flex items-start">
-                                <div class="text-2xl text-web-glow mr-4 mt-1"><i class="fas fa-envelope"></i></div>
-                                <div>
-                                    <h4 class="text-lg font-bold mb-1">Email</h4>
-                                    <a href="mailto:webomancy@gmail.com" class="text-web-light hover:text-web-glow transition">webomancy@gmail.com</a>
-                                </div>
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="md:flex">
+                <div class="md:w-1/2 mb-12 md:mb-0 fade-in">
+                    <h2 class="serif-font text-3xl md:text-4xl font-bold mb-6">Get In Touch</h2>
+                    <div class="w-20 h-0.5 bg-[#c5a880] mb-6"></div>
+                    <p class="text-[#666666] mb-8">Ready to start your project or have questions? We'd love to hear from you.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-[#c5a880] text-xl mr-4 mt-1">
+                                <i class="fas fa-envelope"></i>
                             </div>
-                            
-                            <div class="flex items-start">
-                                <div class="text-2xl text-web-glow mr-4 mt-1"><i class="fas fa-phone-alt"></i></div>
-                                <div>
-                                    <h4 class="text-lg font-bold mb-1">Phone</h4>
-                                    <a href="tel:+918655686355" class="text-web-light hover:text-web-glow transition">+91 86556 86355</a>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="text-2xl text-web-glow mr-4 mt-1"><i class="fas fa-map-marker-alt"></i></div>
-                                <div>
-                                    <h4 class="text-lg font-bold mb-1">Location</h4>
-                                    <p class="text-web-light">(we don't have an office currently)</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="text-2xl text-web-glow mr-4 mt-1"><i class="fas fa-clock"></i></div>
-                                <div>
-                                    <h4 class="text-lg font-bold mb-1">Hours</h4>
-                                    <p class="text-web-light">Everyday 10:00 AM - 10:00 PM</p>
-                                </div>
+                            <div>
+                                <h3 class="font-medium mb-1">Email</h3>
+                                <a href="mailto:webomancy@gmail.com" class="text-[#666666] hover:text-[#c5a880]">webomancy@gmail.com</a>
                             </div>
                         </div>
                         
-                        <div class="mt-12">
-                            <h4 class="text-xl font-bold mb-4">Follow Us</h4>
-                            <div class="flex space-x-4">
-                                <a href="#home" class="text-2xl hover:text-web-glow transition glow-hover"><i class="fab fa-youtube"></i></a>
-                                <a href="#home" class="text-2xl hover:text-web-glow transition glow-hover"><i class="fab fa-instagram"></i></a>
-                                <a href="#home" class="text-2xl hover:text-web-glow transition glow-hover"><i class="fab fa-twitter"></i></a>
-                                <a href="#home" class="text-2xl hover:text-web-glow transition glow-hover"><i class="fab fa-linkedin-in"></i></a>
+                        <div class="flex items-start">
+                            <div class="text-[#c5a880] text-xl mr-4 mt-1">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium mb-1">Phone</h3>
+                                <a href="tel:+918655686355" class="text-[#666666] hover:text-[#c5a880]">+91 86556 86355</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-[#c5a880] text-xl mr-4 mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium mb-1">Location</h3>
+                                <p class="text-[#666666]">Based in Kerala, serving clients across India</p>
                             </div>
                         </div>
                     </div>
+                </div>
+                
+                <div class="md:w-1/2 fade-in">
+<form id="contact-form" class="bg-[#f9f7f1] p-8 rounded-lg">
+    <div class="mb-6">
+        <label for="name" class="block text-[#666666] mb-2">Your Name</label>
+        <input type="text" id="name" name="user_name" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#c5a880] focus:outline-none" required>
+    </div>
+    
+    <div class="mb-6">
+        <label for="email" class="block text-[#666666] mb-2">Email Address</label>
+        <input type="email" id="email" name="user_email" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#c5a880] focus:outline-none" required>
+    </div>
+    
+    <div class="mb-6">
+        <label for="message" class="block text-[#666666] mb-2">Your Message</label>
+        <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#c5a880] focus:outline-none" required></textarea>
+    </div>
+    
+    <button type="submit" class="btn-gold text-white px-8 py-3 rounded-lg font-medium w-full">Send Message</button>
+</form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Creations Section -->
-    <section id="creations" class="py-20 bg-gradient-to-b from-web-blue to-web-dark">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold mb-4 text-center glow-text">Our Creations</h2>
-            <p class="text-xl text-web-light text-center mb-16 max-w-1xl mx-auto">
-                Websites that speak your language. Pre-built. Pre-loved. Prepped for you.
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              
-                <!-- Portfolio Item -->
-                <div class="portfolio-item relative rounded-xl overflow-hidden h-80">
-                    <img src="image1.webp" alt="Noir Dining" class="w-full h-full object-cover">
-                    <div class="portfolio-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-end p-6">
-                        <h3 class="text-2xl font-bold mb-2">Noir Dining</h3>
-                        <p class="text-web-light mb-4">A simple dark-themed restaurant website</p>
-                        <a href="https://webomancy-noir-dining-t4-demo.pages.dev/" class="text-web-glow font-bold hover:underline" target="_blank">View Site</a>
-                    </div>
-                </div>
-
-                <!-- Portfolio Item -->
-                <div class="portfolio-item relative rounded-xl overflow-hidden h-80">
-                    <img src="image2.webp" alt="Noir Kitchen" class="w-full h-full object-cover">
-                    <div class="portfolio-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-end p-6">
-                        <h3 class="text-2xl font-bold mb-2">Noir Kitchen</h3>
-                        <p class="text-web-light mb-4">A simple light-themed restaurant website</p>
-                        <a href="https://webomancy-noir-kitchen-light-t4-demo.pages.dev/" class="text-web-glow font-bold hover:underline" target="_blank">View Site</a>
-                    </div>
-                </div>
-
-                <!-- Portfolio Item -->
-                <div class="portfolio-item relative rounded-xl overflow-hidden h-80">
-                    <img src="image3.webp" alt="Hollywood Mens Wear" class="w-full h-full object-cover">
-                    <div class="portfolio-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-end p-6">
-                        <h3 class="text-2xl font-bold mb-2">Hollywood Mens Wear</h3>
-                        <p class="text-web-light mb-4">A luxury dark-themed mens wear store website</p>
-                        <a href="https://webomancy-hollywood-mens-wear-demo-t5.pages.dev/" class="text-web-glow font-bold hover:underline" target="_blank">View Site</a>
-                    </div>
-                </div>
-              
-            </div>
-            
-            <div class="text-center mt-16">
-                <a href="creations" class="inline-block bg-web-glow hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg animate-glow">
-                    See More
-                </a>
+    <!-- Newsletter -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8 bg-[#f9f7f1] border-t border-[#e2e2e2]">
+        <div class="max-w-4xl mx-auto text-center fade-in">
+            <h3 class="serif-font text-2xl font-semibold mb-4">Want web tips and updates from us?</h3>
+            <p class="text-[#666666] mb-6 max-w-2xl mx-auto">Join our newsletter for insights on web design, digital marketing, and growing your online presence.</p>
+            <div class="flex flex-col sm:flex-row max-w-md mx-auto sm:max-w-xl">
+                <input type="email" placeholder="Your email address" class="px-4 py-3 rounded-lg border border-gray-200 focus:border-[#c5a880] focus:outline-none mb-3 sm:mb-0 sm:mr-3 flex-grow">
+                <button class="btn-gold text-white px-6 py-3 rounded-lg font-medium">Subscribe</button>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black py-16">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                <!-- Navigation -->
-                <div>
-                    <h3 class="text-xl font-bold mb-6 text-web-glow">Navigation</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#home" class="text-web-light hover:text-web-glow transition nav-link">Home</a></li>
-                        <li><a href="#plans" class="text-web-light hover:text-web-glow transition nav-link">Plans</a></li>
-                        <li><a href="#about" class="text-web-light hover:text-web-glow transition nav-link">About</a></li>
-                        <li><a href="#contact" class="text-web-light hover:text-web-glow transition nav-link">Contact</a></li>
-                        <li><a href="#creations" class="text-web-light hover:text-web-glow transition nav-link">Creations</a></li>
-                    </ul>
+    <footer class="bg-[#1a1a1a] text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="md:flex md:justify-between">
+                <div class="mb-8 md:mb-0">
+                    <span class="serif-font text-2xl text-white">Webomancy</span>
+                    <p class="text-[#999999] mt-4 max-w-xs">Crafting digital experiences that elevate your brand.</p>
                 </div>
                 
-                <!-- Contact Us -->
-                <div>
-                    <h3 class="text-xl font-bold mb-6 text-web-glow">Contact Us</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <i class="fas fa-envelope text-web-glow mr-3 mt-1"></i>
-                            <a href="mailto:webomancy@gmail.com" class="text-web-light hover:text-web-glow transition">webomancy@gmail.com</a>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-phone-alt text-web-glow mr-3 mt-1"></i>
-                            <a href="tel:+91 86556 86355" class="text-web-light hover:text-web-glow transition">+91 86556 86355</a>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt text-web-glow mr-3 mt-1"></i>
-                            <span class="text-web-light">(we currently dont have an office)</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- Info -->
-                <div>
-                    <h3 class="text-xl font-bold mb-6 text-web-glow">Info</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#home" class="text-web-light hover:text-web-glow transition nav-link">Privacy Policy</a></li>
-                        <li><a href="#home" class="text-web-light hover:text-web-glow transition nav-link">Terms of Service</a></li>
-                        <li><a href="#home" class="text-web-light hover:text-web-glow transition nav-link">FAQs</a></li>
-                        <li><a href="#home" class="text-web-light hover:text-web-glow transition nav-link">Careers</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Social Media -->
-                <div>
-                    <h3 class="text-xl font-bold mb-6 text-web-glow">Follow Us</h3>
-                    <div class="flex space-x-6 mb-6">
-                        <a href="#home" class="text-2xl hover:text-web-glow transition glow-hover"><i class="fab fa-youtube"></i></a>
-                        <a href="#home" class="text-2xl hover:text-web-glow transition glow-hover"><i class="fab fa-instagram"></i></a>
-                        <a href="#home" class="text-2xl hover:text-web-glow transition glow-hover"><i class="fab fa-twitter"></i></a>
-                        <a href="#home" class="text-2xl hover:text-web-glow transition glow-hover"><i class="fab fa-linkedin-in"></i></a>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-sm font-semibold text-[#c5a880] uppercase tracking-wider mb-4">Navigation</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#home" class="text-[#999999] hover:text-white">Home</a></li>
+                            <li><a href="#services" class="text-[#999999] hover:text-white">Services</a></li>
+                            <li><a href="#pricing" class="text-[#999999] hover:text-white">Pricing</a></li>
+                            <li><a href="#portfolio" class="text-[#999999] hover:text-white">Portfolio</a></li>
+                            <li><a href="#about" class="text-[#999999] hover:text-white">About</a></li>
+                            <li><a href="#contact" class="text-[#999999] hover:text-white">Contact</a></li>
+                        </ul>
                     </div>
-                    <p class="text-web-light">
-                        Subscribe to our newsletter for web insights and special offers.
-                    </p>
-                    <div class="mt-4 flex">
-                        <input type="email" placeholder="Your email" class="bg-gray-900 text-white px-4 py-2 rounded-l-lg focus:outline-none w-full">
-                        <a href="#home"><button class="bg-web-glow hover:bg-blue-600 text-white px-4 py-2 rounded-r-lg transition">
-                            <i class="fas fa-paper-plane"></i>
-                        </button></a>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-[#c5a880] uppercase tracking-wider mb-4">Services</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#contact" class="text-[#999999] hover:text-white">Web Design</a></li>
+                            <li><a href="#contact" class="text-[#999999] hover:text-white">E-Commerce</a></li>
+                            <li><a href="#contact" class="text-[#999999] hover:text-white">Website Redesign</a></li>
+                            <li><a href="#contact" class="text-[#999999] hover:text-white">SEO</a></li>
+                            <li><a href="#contact" class="text-[#999999] hover:text-white">Maintenance</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-[#c5a880] uppercase tracking-wider mb-4">Contact</h3>
+                        <ul class="space-y-2">
+                            <li class="text-[#999999]">webomancy@gmail.com</li>
+                            <li class="text-[#999999]">+91 86556 86355</li>
+                            <li class="text-[#999999]">Kerala, India</li>
+                        </ul>
                     </div>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 mt-16 pt-8 text-center text-web-light">
-                <p>© 2025 Webomancy. All rights reserved.</p>
+            <div class="mt-12 pt-8 border-t border-[#333333]">
+                <div class="md:flex md:items-center md:justify-between">
+                    <p class="text-[#999999] text-sm">© 2025 Webomancy. Built with love in Kerala.</p>
+                    <div class="mt-4 md:mt-0 flex space-x-6">
+                        <a href="#home" class="text-[#999999] hover:text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#home" class="text-[#999999] hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#home" class="text-[#999999] hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#home" class="text-[#999999] hover:text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
-    <div id="overlay" class="overlay"></div>
-    <div id="success-modal" class="modal">
-      <div class="modal-content">
-        <p id="modal-text" class="modal-text">Email sent successfully!</p>
-        <button onclick="closeModal()" class="close-btn">Close</button>
-      </div>
-    </div>
-    <script src="scripts.js"></script>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('preloader').style.opacity = '0';
+                document.getElementById('preloader').style.visibility = 'hidden';
+            }, 500);
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Pricing estimator
+        const pricingData = {
+            'single-page': {
+                'simple': {
+                    'foundation': { min: 100, max: 199 },
+                    'momentum': { min: 499, max: 899 },
+                    'mastery': { min: 999, max: 1399 },
+                    'innovation': { min: 1699, max: 1999 }
+                },
+                'advanced-ui': {
+                    'foundation': { min: 150, max: 249 },
+                    'momentum': { min: 599, max: 999 },
+                    'mastery': { min: 1199, max: 1599 },
+                    'innovation': { min: 1899, max: 2199 }
+                },
+                'scroll-effects': {
+                    'foundation': { min: 200, max: 299 },
+                    'momentum': { min: 699, max: 1099 },
+                    'mastery': { min: 1299, max: 1699 },
+                    'innovation': { min: 1999, max: 2299 }
+                },
+                'cms-admin': {
+                    'foundation': { min: 300, max: 399 },
+                    'momentum': { min: 799, max: 1199 },
+                    'mastery': { min: 1399, max: 1799 },
+                    'innovation': { min: 2099, max: 2399 }
+                }
+            },
+            'multi-page': {
+                'simple': {
+                    'foundation': { min: 300, max: 399 },
+                    'momentum': { min: 799, max: 1199 },
+                    'mastery': { min: 1399, max: 1799 },
+                    'innovation': { min: 2099, max: 2399 }
+                },
+                'advanced-ui': {
+                    'foundation': { min: 400, max: 499 },
+                    'momentum': { min: 899, max: 1299 },
+                    'mastery': { min: 1599, max: 1999 },
+                    'innovation': { min: 2299, max: 2599 }
+                },
+                'scroll-effects': {
+                    'foundation': { min: 500, max: 599 },
+                    'momentum': { min: 999, max: 1399 },
+                    'mastery': { min: 1799, max: 2199 },
+                    'innovation': { min: 2499, max: 2799 }
+                },
+                'cms-admin': {
+                    'foundation': { min: 600, max: 699 },
+                    'momentum': { min: 1099, max: 1499 },
+                    'mastery': { min: 1899, max: 2299 },
+                    'innovation': { min: 2599, max: 2899 }
+                }
+            },
+            'ecommerce': {
+                'simple': {
+                    'foundation': { min: 500, max: 599 },
+                    'momentum': { min: 999, max: 1399 },
+                    'mastery': { min: 1799, max: 2199 },
+                    'innovation': { min: 2499, max: 2799 }
+                },
+                'advanced-ui': {
+                    'foundation': { min: 600, max: 699 },
+                    'momentum': { min: 1099, max: 1499 },
+                    'mastery': { min: 1899, max: 2299 },
+                    'innovation': { min: 2599, max: 2899 }
+                },
+                'scroll-effects': {
+                    'foundation': { min: 700, max: 799 },
+                    'momentum': { min: 1199, max: 1599 },
+                    'mastery': { min: 1999, max: 2399 },
+                    'innovation': { min: 2699, max: 2999 }
+                },
+                'cms-admin': {
+                    'foundation': { min: 800, max: 899 },
+                    'momentum': { min: 1299, max: 1699 },
+                    'mastery': { min: 2099, max: 2499 },
+                    'innovation': { min: 2799, max: 3099 }
+                }
+            },
+            'blog-cms': {
+                'simple': {
+                    'foundation': { min: 400, max: 499 },
+                    'momentum': { min: 899, max: 1299 },
+                    'mastery': { min: 1599, max: 1999 },
+                    'innovation': { min: 2299, max: 2599 }
+                },
+                'advanced-ui': {
+                    'foundation': { min: 500, max: 599 },
+                    'momentum': { min: 999, max: 1399 },
+                    'mastery': { min: 1799, max: 2199 },
+                    'innovation': { min: 2499, max: 2799 }
+                },
+                'scroll-effects': {
+                    'foundation': { min: 600, max: 699 },
+                    'momentum': { min: 1099, max: 1499 },
+                    'mastery': { min: 1899, max: 2299 },
+                    'innovation': { min: 2599, max: 2899 }
+                },
+                'cms-admin': {
+                    'foundation': { min: 700, max: 799 },
+                    'momentum': { min: 1199, max: 1599 },
+                    'mastery': { min: 1999, max: 2399 },
+                    'innovation': { min: 2699, max: 2999 }
+                }
+            }
+        };
+
+        let currentStep = 1;
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const steps = document.querySelectorAll('[id^="step-"]');
+        const resultDiv = document.getElementById('result');
+        const priceRange = document.getElementById('price-range');
+
+        nextBtn.addEventListener('click', function() {
+            if (validateCurrentStep()) {
+                steps[currentStep - 1].classList.add('hidden');
+                currentStep++;
+                
+                if (currentStep === 4) {
+                    calculatePrice();
+                    resultDiv.classList.remove('hidden');
+                    nextBtn.classList.add('hidden');
+                } else {
+                    steps[currentStep - 1].classList.remove('hidden');
+                }
+                
+                if (currentStep > 1) {
+                    prevBtn.classList.remove('hidden');
+                }
+            }
+        });
+
+        prevBtn.addEventListener('click', function() {
+            steps[currentStep - 1].classList.add('hidden');
+            currentStep--;
+            steps[currentStep - 1].classList.remove('hidden');
+            
+            if (currentStep === 1) {
+                prevBtn.classList.add('hidden');
+            }
+            
+            if (currentStep < 4) {
+                resultDiv.classList.add('hidden');
+                nextBtn.classList.remove('hidden');
+            }
+        });
+
+        function validateCurrentStep() {
+            if (currentStep === 1) {
+                return document.querySelector('input[name="website-type"]:checked') !== null;
+            } else if (currentStep === 2) {
+                return document.querySelector('input[name="features"]:checked') !== null;
+            } else if (currentStep === 3) {
+                return document.querySelector('input[name="package"]:checked') !== null;
+            }
+            return true;
+        }
+
+        function calculatePrice() {
+            const websiteType = document.querySelector('input[name="website-type"]:checked').value;
+            const features = document.querySelector('input[name="features"]:checked').value;
+            const package = document.querySelector('input[name="package"]:checked').value;
+            
+            const price = pricingData[websiteType][features][package];
+            priceRange.textContent = `₹${price.min} – ₹${price.max}`;
+        }
+
+        // Custom radio button interaction
+        document.querySelectorAll('.custom-radio').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.querySelectorAll('.radio-label').forEach(label => {
+                    label.classList.remove('border-[#c5a880]', 'bg-[rgba(197,168,128,0.1)]');
+                });
+                
+                if (this.checked) {
+                    const label = document.querySelector(`label[for="${this.id}"]`);
+                    label.classList.add('border-[#c5a880]', 'bg-[rgba(197,168,128,0.1)]');
+                }
+            });
+        });
+
+        // Scroll animations
+        function checkVisibility() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                
+                if (elementTop < window.innerHeight && elementBottom > 0) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkVisibility);
+        window.addEventListener('load', checkVisibility);
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
