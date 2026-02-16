@@ -1,0 +1,1 @@
+import{g as e}from"./index-DFUEZLYg.js";document.addEventListener("DOMContentLoaded",()=>{const t=e.timeline({defaults:{ease:"power3.out"}});t.from(".headline",{y:60,opacity:0,duration:1}).from(".subheadline",{y:20,opacity:0,duration:.8},"-=0.6"),t.from(".detail-group",{x:30,opacity:0,duration:.8,stagger:.2},"-=0.6")});

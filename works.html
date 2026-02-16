@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works | Webomancy</title>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="description" content="Cinematic portfolio of our digital craftsmanship.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+  <script type="module" crossorigin src="/assets/works-FAMsM1hp.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/index-DFUEZLYg.js">
+  <link rel="stylesheet" crossorigin href="/assets/works-C8I-QCA-.css">
+</head>
+
+<body>
+    <!-- Background: Dynamic Image + Starfield + Noise -->
+    <div id="bg-image-container"></div>
+    <canvas id="glitch-canvas"></canvas>
+    <div class="background-container">
+        <!-- Starfield removed -->
+        <div class="noise-overlay"></div>
+    </div>
+
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-links">
+            <a href="/" class="nav-item">Home</a>
+            <a href="/works.html" class="nav-item active">Works</a>
+            <a href="/about.html" class="nav-item">About</a>
+        </div>
+        <div class="nav-actions">
+            <a href="contact.html" class="btn-neon">
+                Contact
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Layout -->
+    <main class="works-main">
+        <!-- Left Column: Title + Thumbnails -->
+        <div class="left-col">
+            <h1 class="works-headline">Works</h1>
+            <div class="thumbnails-scroll-container">
+                <div class="thumbnails-list" id="thumbnails-list">
+                    <!-- Injected by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Center/Right: Preview Area -->
+        <div class="preview-area">
+            <div class="preview-card">
+                <div class="preview-image-container" id="preview-container">
+                    <!-- Images injected by JS for crossfade -->
+                </div>
+
+                <div class="preview-details">
+                    <div class="preview-meta-row">
+                        <div class="project-text-group">
+                            <h2 class="project-title-large" id="preview-title">Project Title</h2>
+                            <p class="project-subtitle" id="preview-subtitle">Subtitle goes here</p>
+                        </div>
+                    </div>
+                    <a href="#" class="link-neon" id="preview-link">Visit Site →</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile-only elements (hidden on desktop via CSS) -->
+    <div class="mobile-project-counter" id="mobile-counter">
+        <div class="counter-text">
+            <span class="counter-current" id="counter-current">01</span>
+            <span class="counter-separator"></span>
+            <span class="counter-total" id="counter-total">12</span>
+        </div>
+        <div class="counter-nav-buttons">
+            <button id="prev-project" class="nav-btn prev">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+            <button id="next-project" class="nav-btn next">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+</body>
+
+</html>
