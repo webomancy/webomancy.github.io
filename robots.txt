@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+Sitemap: https://webomancy.github.io/sitemap_file.xml
+
