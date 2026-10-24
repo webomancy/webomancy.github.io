@@ -1,0 +1,24 @@
+/* One composed mobile ecosystem, using the desktop's editorial proportions. */
+@media(max-width:700px){
+ #ecosystem{padding-top:30px;padding-bottom:10px}
+ #ecosystem .ecosystem-heading h2{font-size:clamp(43px,11.2vw,64px);line-height:1.02;letter-spacing:-.035em;max-width:470px}
+ #ecosystem .ecosystem-intro{margin-top:24px;max-width:340px}
+ #ecosystem .ecosystem-intro>p{font-size:13px;line-height:1.85;color:#aaa598;max-width:32ch}
+ #ecosystem .web-workspace{height:650px;min-height:0;overflow:visible}
+ #ecosystem .web-controls{top:26px;left:6vw;right:6vw}
+ #ecosystem .control-buttons{gap:8px}
+ #ecosystem .control-buttons .pill-button{min-height:42px;border-color:#c8a96e40;padding:9px 14px;background:transparent}
+ #ecosystem .control-buttons .liquid-content{font-size:10px;font-weight:500}
+ #ecosystem .icon-button{width:42px;height:42px;border-color:#c8a96e30}
+ #ecosystem .anchor-nodes{top:410px!important;left:6vw!important;right:6vw!important;column-gap:24px!important;row-gap:20px!important}
+ #ecosystem .service-anchor{min-height:82px!important;padding:15px 0 10px!important;border-top:1px solid #c8a96e30!important;transform:none;transition:border-color .4s ease!important}
+ #ecosystem .service-anchor:active{transform:none!important;border-color:#c8a96e90!important}
+ #ecosystem .anchor-title{font-size:clamp(25px,6.4vw,33px)!important;line-height:1.08!important;letter-spacing:-.025em!important;color:#e7e1d4!important;font-weight:300!important}
+ #ecosystem .anchor-title em{color:#bfa777!important}
+ #ecosystem .service-anchor.lit .anchor-title em{color:#e2c993!important}
+ #ecosystem .ecosystem-end{display:flex;justify-content:flex-end;padding:4px 0 24px;margin-top:0}
+ #ecosystem .ecosystem-end .text-button{margin:0;gap:26px;padding:8px 0;font-size:12px;min-height:44px;color:#ccb58a}
+ #ecosystem .mesh-label{display:none!important}
+}
+@media(max-width:360px){#ecosystem .anchor-nodes{column-gap:20px!important}#ecosystem .anchor-title{font-size:23px!important}#ecosystem .ecosystem-heading h2{font-size:40px}#ecosystem .web-workspace{height:640px}}
+@media(min-width:500px) and (max-width:700px){#ecosystem .web-workspace{height:700px}#ecosystem .anchor-nodes{top:445px!important}#ecosystem .service-anchor{min-height:94px!important}}

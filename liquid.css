@@ -1,0 +1,29 @@
+/* A single reversible transform supplies the swell and drain. */
+.liquid-pill{--liquid-fill:#ebe6dd;position:relative!important;overflow:hidden!important;isolation:isolate;border-radius:9999px}
+.liquid-pill.audit-trigger,#submit-audit.liquid-pill{--liquid-fill:#d8bd83}
+.liquid-pill::before{content:"";position:absolute;left:-10%;width:120%;height:240%;bottom:0;background:var(--liquid-fill);border-radius:50% 50% 0 0;transform:translate3d(0,105%,0) scaleY(.65);transition:transform 1.05s cubic-bezier(.22,.68,.2,1),border-radius 1.05s cubic-bezier(.22,.68,.2,1);z-index:0;pointer-events:none}
+.liquid-pill::after{display:none!important}
+.liquid-pill>.liquid-content{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:inherit;color:#ebe6dd;font:inherit;line-height:inherit;transition:color .2s ease}
+.liquid-pill .liquid-content>span{transition:color .2s ease}
+.liquid-pill:focus-visible:not(:disabled)::before{transform:translate3d(0,18%,0) scaleY(1);border-radius:35% 35% 0 0}
+.liquid-pill:focus-visible:not(:disabled){border-color:var(--liquid-fill)!important}
+.liquid-pill:focus-visible:not(:disabled)>.liquid-content,.liquid-pill:focus-visible:not(:disabled)>.liquid-content>span,#submit-audit.liquid-pill:focus-visible:not(:disabled) .submit-label{color:#080a07!important;transition-delay:.16s}
+@media(hover:hover) and (pointer:fine){
+ .liquid-pill:hover:not(:disabled)::before{transform:translate3d(0,18%,0) scaleY(1);border-radius:35% 35% 0 0}
+ .liquid-pill:hover:not(:disabled){border-color:var(--liquid-fill)!important}
+ .liquid-pill:hover:not(:disabled)>.liquid-content,.liquid-pill:hover:not(:disabled)>.liquid-content>span,#submit-audit.liquid-pill:hover:not(:disabled) .submit-label{color:#080a07!important;transition-delay:.16s}
+}
+@media(hover:none){.liquid-pill:active:not(:disabled)::before{transform:translate3d(0,18%,0) scaleY(1);border-radius:35% 35% 0 0}.liquid-pill:active:not(:disabled)>.liquid-content,.liquid-pill:active:not(:disabled)>.liquid-content>span,#submit-audit.liquid-pill:active:not(:disabled) .submit-label{color:#080a07!important;transition-delay:0s}}
+@media(prefers-reduced-motion:reduce){.liquid-pill::before,.liquid-pill>.liquid-content,.liquid-pill .liquid-content>span{transition:none!important}}
+html[data-reduced-motion] .liquid-pill::before,html[data-reduced-motion] .liquid-pill>.liquid-content,html[data-reduced-motion] .liquid-pill .liquid-content>span{transition:none!important}
+.site-nav .pill-button .liquid-content{font-size:inherit;line-height:inherit}
+
+/* Keep labels crisp over the light fill, including during the slow swell. */
+.liquid-pill>.liquid-content{font-weight:600;opacity:1;letter-spacing:.01em}
+.liquid-pill .liquid-content>span{font-weight:600;opacity:1}
+.pill-button>.liquid-content{font-size:13px}
+.site-nav .pill-button>.liquid-content{font-size:11px}
+#submit-audit.liquid-pill .submit-label{font-size:12px;font-weight:600}
+.liquid-content>[aria-hidden=true]{font-size:19px;font-weight:600}
+@media(max-width:700px){.site-nav .pill-button>.liquid-content{font-size:10px}.control-buttons .pill-button>.liquid-content{font-size:11px}.roadmap-finale .pill-button>.liquid-content{font-size:12px}}
+@media(max-width:360px){.site-nav .pill-button>.liquid-content{font-size:9px}}
